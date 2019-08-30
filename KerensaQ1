@@ -1,0 +1,9 @@
+library(tidyverse)
+simpsons <- 
+readr::read_delim("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-27/simpsons-guests.csv", 
+delim = "|", quote = "")
+
+most_appearance <- simpsons %>% 
+  group_by(guest_star) %>%
+  summarise(counts = n(), roles_played = toString(unique(role))) %>%
+  filter(counts == max(counts)) 
